@@ -1,0 +1,24 @@
+:root {
+  --primary-blue: #1E3A8A; /* أزرق داكن (للهيدر والأزرار الأساسية) */
+  --secondary-blue: #3B82F6; /* أزرق فاتح مودرن (للتفاعلات والتأثيرات) */
+  --light-blue: #EFF6FF; /* أزرق باهت جداً (لخلفية المنصة) */
+  --text-dark: #1F2937; /* لون النصوص الأساسية */
+  --text-light: #9CA3AF; /* لون النصوص الفرعية */
+  --white: #FFFFFF;
+  --danger: #EF4444; /* للتنبيهات والتحذيرات */
+  --success: #10B981; /* لنجاح تسجيل الحضور */
+  --font-family: 'Tajawal', 'Cairo', sans-serif; /* خطوط عربية عصرية */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: var(--font-family);
+}
+
+body {
+  background-color: var(--light-blue);
+  color: var(--text-dark);
+  direction: rtl;
+}
