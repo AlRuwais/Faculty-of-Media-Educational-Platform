@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لوحة تحكم الإدارة | كلية الإعلام</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+
+    <div class="dashboard-container">
+        <!-- الشريط الجانبي (Sidebar) -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h3>إدارة المنصة</h3>
+                <p>كلية الإعلام - جامعة الأزهر</p>
+            </div>
+            <ul class="nav-links">
+                <li class="active" onclick="switchSection('students-section', this)">👨‍🎓 إدارة الطلاب</li>
+                <li onclick="switchSection('content-section', this)">📚 إدارة المحتوى</li>
+                <li onclick="switchSection('attendance-section', this)">📍 الحضور والغياب (GPS)</li>
+                <li onclick="switchSection('complaints-section', this)">✉️ إدارة الشكاوى</li>
+            </ul>
+            <button class="logout-btn" onclick="logout()">تسجيل الخروج</button>
+        </aside>
+
+        <!-- منطقة المحتوى الرئيسي -->
+        <main class="main-content">
+            <!-- قسم إدارة الطلاب -->
+            <section id="students-section" class="content-section active-section">
+                <h2>إدارة الطلاب</h2>
+                <div class="actions-bar">
+                    <button class="btn-primary">إضافة طالب جديد +</button>
+                    <input type="text" placeholder="بحث عن طالب بكود الجامعة..." class="search-input">
+                </div>
+                <!-- سيتم لاحقاً إضافة جدول عرض الطلاب هنا -->
+                <div class="data-table-container">
+                    <p class="placeholder-text">جاري جلب بيانات الطلاب من السحابة...</p>
+                </div>
+            </section>
+
+            <!-- قسم إدارة المحتوى -->
+            <section id="content-section" class="content-section">
+                <h2>إدارة المحتوى والمقررات</h2>
+                <div class="actions-bar">
+                    <select class="filter-select">
+                        <option value="">اختر الفرقة الدراسية</option>
+                        <option value="1">الفرقة الأولى</option>
+                        <option value="2">الفرقة الثانية</option>
+                        <option value="3">الفرقة الثالثة</option>
+                        <option value="4">الفرقة الرابعة</option>
+                    </select>
+                    <button class="btn-primary">رفع مقرر جديد</button>
+                </div>
+            </section>
+
+            <!-- قسم الحضور والغياب (GPS) -->
+            <section id="attendance-section" class="content-section">
+                <h2>نظام الحضور والغياب الذكي</h2>
+                <div class="settings-card">
+                    <h3>إعدادات المحاضرة الحالية</h3>
+                    <div class="form-grid">
+                        <input type="text" placeholder="اسم المادة" class="input-field">
+                        <input type="text" placeholder="الكود السري للتسجيل" class="input-field">
+                        <input type="text" placeholder="إحداثيات القاعة (GPS)" class="input-field">
+                        <input type="number" placeholder="أقصى مسافة مسموحة (بالمتر)" class="input-field">
+                    </div>
+                    <button class="btn-success">فتح باب التسجيل</button>
+                    <button class="btn-danger">إغلاق التسجيل</button>
+                </div>
+            </section>
+
+            <!-- قسم إدارة الشكاوى -->
+            <section id="complaints-section" class="content-section">
+                <h2>صندوق الشكاوى والمقترحات</h2>
+                <div class="data-table-container">
+                    <p class="placeholder-text">لا توجد شكاوى جديدة.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="js/admin.js"></script>
+</body>
+</html>
