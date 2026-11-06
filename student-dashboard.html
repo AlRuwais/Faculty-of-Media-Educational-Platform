@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>بوابة الطالب | كلية الإعلام - جامعة الأزهر</title>
+    <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/variables.css">
+    <link rel="stylesheet" href="css/student.css">
+</head>
+<body>
+
+    <!-- الهيدر العلوي وشريط التنبيهات -->
+    <header class="top-header">
+        <div class="user-info-summary">
+            <h2>مرحباً، <span id="student-name">...</span></h2>
+            <p>الفرقة: <span id="student-year">...</span> | الكود: <span id="student-code-display">...</span></p>
+        </div>
+        <button class="logout-btn" onclick="studentLogout()">تسجيل الخروج</button>
+    </header>
+
+    <!-- شريط التنبيهات العاجلة من الإدارة -->
+    <div id="alert-banner" class="alert-banner hidden">
+        📢 <strong>تنبيه مهم:</strong> <span id="alert-text">لا توجد تنبيهات جديدة حالياً.</span>
+    </div>
+
+    <div class="student-container">
+        <!-- القائمة الجانبية لتنقل الطالب -->
+        <aside class="student-sidebar">
+            <ul class="nav-links">
+                <li class="active" onclick="switchStudentTab('attendance-tab', this)">📍 الحضور والغياب (GPS)</li>
+                <li onclick="switchStudentTab('courses-tab', this)">📚 المقررات الدراسية</li>
+                <li onclick="switchStudentTab('schedule-tab', this)">🗓️ الجداول والامتحانات</li>
+                <li onclick="switchStudentTab('grades-tab', this)">📊 درجات الطالب</li>
+                <li onclick="switchStudentTab('forum-tab', this)">💬 منتدى النقاش</li>
+                <li onclick="switchStudentTab('complaints-tab', this)">📝 تقديم شكوى</li>
+            </ul>
+        </aside>
+
+        <!-- المحتوى الرئيسي -->
+        <main class="student-content">
+
+            <!-- 1. قسم الحضور والغياب (Smart Attendance) -->
+            <section id="attendance-tab" class="tab-content active-tab">
+                <h3>تسجيل الحضور المحاضري (GPS)</h3>
+                <div class="card">
+                    <p class="info-note">⚠️ يجب التواجد داخل نطاق القاعة الدراسية والسماح بالوصول للموقع الجغرافي للتسجيل.</p>
+                    <form id="attendance-form">
+                        <div class="input-group">
+                            <label>المادة الدراسية</label>
+                            <select id="attendance-subject" required class="input-field">
+                                <option value="">اختر المادة المتاحة للتسجيل...</option>
+                                <option value="radio">راديو وتلفزيون</option>
+                                <option value="psychology">علم نفس النمو</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>الكود السري للمحاضرة</label>
+                            <input type="text" id="attendance-secret-code" placeholder="أدخل الكود الصادر من المحاضر" required class="input-field">
+                        </div>
+                        <button type="button" class="btn-primary" onclick="registerAttendance()">📍 التحقق من الموقع وتسجيل الحضور</button>
+                    </form>
+                    <p id="attendance-status" class="status-msg"></p>
+                </div>
+            </section>
+
+            <!-- 2. قسم المقررات الدراسية -->
+            <section id="courses-tab" class="tab-content">
+                <h3>الكتب والمقررات الدراسية المقررة</h3>
+                <div id="courses-list" class="grid-cards">
+                    <div class="card course-card">
+                        <h4>مادة الإذاعة والتلفزيون</h4>
+                        <p>د. أستاذ المادة</p>
+                        <a href="#" class="btn-secondary">تحميل المقرر (PDF)</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 3. الجدول الدراسي وجدول الامتحانات -->
+            <section id="schedule-tab" class="tab-content">
+                <h3>الجدول الدراسي والامتحانات</h3>
+                <div class="card">
+                    <h4>جدول المحاضرات الأسبوعي</h4>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>اليوم</th>
+                                <th>المادة</th>
+                                <th>الموعد</th>
+                                <th>القاعة</th>
+                            </tr>
+                        </thead>
+                        <tbody id="schedule-table-body">
+                            <tr>
+                                <td>الأحد</td>
+                                <td>مقدمة في الراديو</td>
+                                <td>10:00 ص - 12:00 م</td>
+                                <td>مدرج 1</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 4. قسم درجات الطالب -->
+            <section id="grades-tab" class="tab-content">
+                <h3>كشف الدرجات وأعمال السنة</h3>
+                <div class="card">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>المادة</th>
+                                <th>أعمال السنة (الميدترم)</th>
+                                <th>الامتحان النهائي</th>
+                                <th>المجموع</th>
+                            </tr>
+                        </thead>
+                        <tbody id="grades-table-body">
+                            <tr>
+                                <td>علم نفس النمو</td>
+                                <td>18 / 20</td>
+                                <td>72 / 80</td>
+                                <td>90 / 100 (ممتاز)</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+
+            <!-- 5. منتدى النقاش -->
+            <section id="forum-tab" class="tab-content">
+                <h3>ساحة الحوار والتبادل الطلابي</h3>
+                <div class="card">
+                    <div class="forum-post-box">
+                        <textarea id="forum-input" placeholder="اكتب سؤالاً أو مشاركة لأبناء فرقتك..." rows="3"></textarea>
+                        <button class="btn-primary" onclick="postToForum()">نشر المشاركة</button>
+                    </div>
+                    <hr>
+                    <div id="forum-messages-container" class="forum-messages">
+                        <!-- الرسائل المنشورة -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- 6. قسم الشكاوى -->
+            <section id="complaints-tab" class="tab-content">
+                <h3>تقديم شكوى أو اقتراح للإدارة</h3>
+                <div class="card">
+                    <form id="complaint-form" onsubmit="submitComplaint(event)">
+                        <div class="input-group">
+                            <label>عنوان الشكوى</label>
+                            <input type="text" id="complaint-title" required class="input-field" placeholder="موضوع الشكوى">
+                        </div>
+                        <div class="input-group">
+                            <label>تفاصيل الشكوى</label>
+                            <textarea id="complaint-body" required class="input-field" rows="4" placeholder="اكتب التفاصيل هنا..."></textarea>
+                        </div>
+                        <button type="submit" class="btn-primary">إرسال للإدارة سحابياً</button>
+                    </form>
+                    <p id="complaint-status" class="status-msg"></p>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script src="js/student.js"></script>
+</body>
+</html>
